@@ -1,120 +1,49 @@
 # project1_group2
 Output of the project 1 - group 2 (ahmed, jasmeen, muskan, nazim)
 
-OUTPUT : Question 4 : How many covid related deaths were reported throughout the pandemic and is there a correlation to the vaccine rollout?
 
 
-0) module importation
+Project 1 – Group 2
+1.	Project title
+Global Investment Trends in Stock Markets During the COVID-19 Pandemic: 
 
-    import pandas as pd
-    import pathlib as path
+2.	Team Members
+-	Mansour, Ahmad
+-	Narwal, Muskan
+-	Kaur, Jasleen
+-	Bendjaballah, Nazim
 
-    import numpy as np
-    from scipy.stats import linregress
-
-    import matplotlib.pyplot as plt
-    import hvplot.pandas
-    import geopandas as gpd
-
-    import requests
-    import json
-    from pprint import pprint
-
-1) CREATE DATA FRAME FOR DEATHS STATISTICS
-    
-    1.1) Input  : 
-    Resource/ : CSV file from World Health Organization csv file 
-    https://data.who.int/dashboards/covid19/data?n=o
-    desciption : Daily data from 2020 to 2024
-    
-    1.2) output 
-    DataFrame death_total_country : Aggregation by country of 
-        - Cumulative_cases 
-        - Cumulative_deaths 
-
-2) CREATE DATAFRAME FOR VACCINATION STATISTICS
-    
-    2.1) Input 
-    'Resources/vaccination-data.csv'
-    https://data.who.int/dashboards/covid19/data?n=o
-    description : data by country of vaccination compaign
+3.	Project description
+Assessing correlations between vaccine rollout, stock performance and larger impact on countries.
+Objective 1: Analyzing correlation between vaccine rollout, stock performance (each vaccine) and larger impact on countries
+Objective 2: Global Vaccine Rollout and its Impact on Stock Markets, Economies, and Public Health"
 
 
-    2.2) Output 
-    DataFrame 'death_vaccins_df_clean '
-    csv file > 'Output/output_death_vaccination_data.csv'
+4.	Research Questions to answer
 
+4.1.	Determine which stock was the best to invest in
+4.2.	Rollout of these different vaccines per country
+4.3.	Is there a correlation between the vaccine rollout and the change in economy of different countries throughout this timeframe (developing, developed, transitioning government)?
+4.4.	How many covid related deaths were reported throughout the pandemic and is there a correlation to the vaccine rollout?
 
-    2.3) processing
-        - Merge Vaccination_df + death_total_country
-        - cleaning : rename columns
+5.	Plan
+The first aim is to compare the performance of stocks of 8 major vaccine companies throughout key points of the pandemic.  In doing so, we will make an analysis of this data in order to determine which stock was the best to invest in. 
 
-3) Extract the official referential of Countries used by the World Bank
-    ## will be used below to extract data (GDP + population)
-    ## can be used for different other requests
-    
-    3.1) Input
-    API World Bank : https://api.worldbank.org/v2/country?format=json
+The second aim is to assess the rollout of these different vaccines per country - this data will be used to make correlations at later points. 
 
-    3.2) Ouput 
-        - DataFrame : countries_df
-        - csv file : Output/output_countries_list_who_referential.csv
+The third aim is to analyze whether or not there is a correlation between vaccine rollout/vaccination rates and changes in the economies of these countries : One of the stated goals of the vaccines was to help once again boost economies so this section aims to analyze whether or not there truly is a correlation there. 
 
-    3.3) Processing
-    for LOOP each page of the json file
-    extract the data releted to each country 
+Finally, we will use that same vaccine rollout data to determine if there is a correlation between vaccination rates and rates of covid-related deaths. Both analyses will feed into the predicted strength of the stocks.
 
-4) CREATE DataFrame WITH GDP_perCapita & POPULATION DATA FOR EACH COUNTRY
-    # data from 2019 to 2023
+6.	Possible datasets
+6.1.	Aim 1 -Stocks related to vaccines - Google Finances,Yahoo Finances
+6.2.	Aim 2 - Johns Hopkins University: They have been tracking COVID-19 data, including vaccination statistics, which can be accessed through their GitHub repository.
+6.3.	Aim 3 - Resources from aim 2 additionally to World Bank data API
+6.4.	Aim 4 -Johns Hopkins University: They have been tracking COVID-19 data, including vaccination statistics, which can be accessed through their GitHub repository.
 
-    4.1) Input
-    API World Bank : https://api.worldbank.org/v2/country/{COUNTRY}/indicator/{INDICATOR}?date={Time Periode}&format=json
+7.	Possible Blockers and how you plan to solve them 
+-	Availability of data
+-	Consistency of the data between different sources
 
-    4.2) Ouput 
-        - DataFrame : gdp_pop_df
-        - csv file : Output/output_countries_gdp_pop.csv
-
-    4.3) Processing
-        - for LOOP each json file (1 by country)
-            extract the data related to each country 
-            extraction in 2 Dataframes
-                    - code Iso 3 positions
-                    - code 2 positions 
-                    - GDP per capita from 2019 to 2023
-                    - Total population from 2019 to 2023
-        - Merge the 2 DF
-
-        - cleaning : 
-            - drop columns
-            - rename columns
-            - drop NAN rows
-
-5) create a DF with full data covid
-
-    5.1) Output
-        - DataFrame data_covid_macro
-        - csv file : 'Output/output_covid_data_macro.csv'
-    
-    5.2) processing 
-        - MERGE death_vaccins_df_clean WITH gdp_pop_df
-        - Merge the new DF with Coutries_df : to retreie coordinate for each country
-        - cleaning
-            - Drop useless columns
-
-6) Analysis
-    multiple analysis 
-        - box plots on data : Vaccination%, death%, Growth
-        - maps representing countries and scale of Vaccination%, death%, Growth
-        - scatterplots and regression on data : box plots on data : Vaccination%, death%, Growth
-
-        6.1) output
-            png files in folder Output
-
-        6.2) Processing
-            - cleaning : selection of useful columns
-
-            - calculation of new values
-                - Vaccination_%
-                - death_%
-                - Grwth
-
+8.	A possible blocker can be identifying which countries are considered countries
+We plan to solve this by having a set number of countries. 
