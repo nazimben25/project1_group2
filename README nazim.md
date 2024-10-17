@@ -28,9 +28,22 @@ OUTPUT : Question 4 : How many covid related deaths were reported throughout the
     desciption : Daily data from 2020 to 2024
     
     1.2) output 
-    DataFrame death_total_country : Aggregation by country of 
-        - Cumulative_cases 
-        - Cumulative_deaths 
+        1.2.1 ) DataFrame death_total_country : Aggregation by country of 
+            - Cumulative_cases 
+            - Cumulative_deaths 
+        
+        1.2.1 ) daily deaths
+            - new DataFrame death_daily_clean_df : daily death per day > mobile average 7days
+            - npg export chart 
+
+    1.3) cleaning 
+    no needed cleaning for the 1.2.1
+
+    for 1.2.2, 
+        - identify outliers
+        - drop the outliers from the DF and work with a death_daily_clean_df
+        - calculate a mobile average (7 days basis)
+
 
 2) CREATE DATAFRAME FOR VACCINATION STATISTICS
     
