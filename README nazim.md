@@ -4,25 +4,35 @@ Output of the project 1 - group 2 (ahmed, jasmeen, muskan, nazim)
 OUTPUT : Question 4 : How many covid related deaths were reported throughout the pandemic and is there a correlation to the vaccine rollout?
 
 
-0) module importation
+0) 
 
-    import pandas as pd
-    import pathlib as path
+    0.1 ) module importation
 
-    import numpy as np
-    from scipy.stats import linregress
+        import pandas as pd
+        import pathlib as path
 
-    import matplotlib.pyplot as plt
-    import hvplot.pandas
-    import geopandas as gpd
+        import numpy as np
+        from scipy.stats import linregress
 
-    import requests
-    import json
-    from pprint import pprint
+        import matplotlib.pyplot as plt
+        import hvplot.pandas
+        import geopandas as gpd
+
+        import requests
+        import json
+        from pprint import pprint
+
+    0.2) directory structure "nazim"
+        - q4_death_vs_vaccination.ipynb : contains the code to collect clean and analyse the data
+        - gitignore file
+        - folder Resources : with raw data (csv files)
+        - folder output : with outputs of the code : dataframes under cvs, png files
+        - other files : include Word and xls  documents for the projetc follow up
+
 
 1) CREATE DATA FRAME FOR DEATHS STATISTICS
     
-    1.1) Input  : 
+    1.1) Input  
     Resource/ : CSV file from World Health Organization csv file 
     https://data.who.int/dashboards/covid19/data?n=o
     desciption : Daily data from 2020 to 2024
@@ -37,7 +47,9 @@ OUTPUT : Question 4 : How many covid related deaths were reported throughout the
             - npg export chart 
 
     1.3) cleaning 
-    no needed cleaning for the 1.2.1
+        - Change Datatype
+        - rename columns
+        - add columns (y + m)
 
     for 1.2.2, 
         - identify outliers
@@ -60,7 +72,9 @@ OUTPUT : Question 4 : How many covid related deaths were reported throughout the
 
     2.3) processing
         - Merge Vaccination_df + death_total_country
-        - cleaning : rename columns
+        - cleaning : 
+            - rename columns
+            - change DataType
 
 3) Extract the official referential of Countries used by the World Bank
     ## will be used below to extract data (GDP + population)
