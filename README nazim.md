@@ -1,6 +1,8 @@
 # project1_group2
 Output of the project 1 - group 2 (ahmed, jasmeen, muskan, nazim)
 
+Question 4 : COVID correlation between vaccination compaign and Deaths 
+
 OUTPUT : Question 4 : How many covid related deaths were reported throughout the pandemic and is there a correlation to the vaccine rollout?
 
 
@@ -28,6 +30,10 @@ OUTPUT : Question 4 : How many covid related deaths were reported throughout the
         import json
         from pprint import pprint
 
+    0.2) define a function REGRESSION
+        - function to calculate regression parameters
+        - generate reg equation
+        - generate a scatter plot + regression line for 2 series
 
 
 1) COLLECT THE DATA
@@ -35,7 +41,7 @@ OUTPUT : Question 4 : How many covid related deaths were reported throughout the
     1.1) Countries referential
 
     Official referential of Countries used by the World Bank
-        will be used below to extract data (GDP + population)
+        will be used below to extract data (GDP + population, region, coordinates)
         can be used for different other requests
         
         1.1.1) Input
@@ -46,23 +52,23 @@ OUTPUT : Question 4 : How many covid related deaths were reported throughout the
             - csv file : Output/output_countries_list_who_referential.csv
 
         1.1.3) Processing
-        for LOOP each page of the json file
-        extract the data releted to each country 
+            for LOOP each page of the json file
+            Extract the data related to each country : 'id', 'iso2Code', 'name', 'region','capitalCity', 'longitude', 'latitude'
 
     
-    1.2) CREATE DATA FRAME FOR DEATHS STATISTICS
+    1.2) Collect Data for COVID deaths 
 
-    CSV file from World Health Organization csv file 
-    https://data.who.int/dashboards/covid19/data?n=o
+        CSV file from World Health Organization website 
+        https://data.who.int/dashboards/covid19/data?n=o
+        
+        desciption : Daily data from 01-2020 to 09-2024 (deaths + cases by country)
     
-    desciption : Daily data from 2020 to 2024
-    
-    1.3) CREATE DATA FRAME FOR Vaccination STATISTICS 
+    1.3) Collect Data for COVID vaccination compaign 
 
-    csv file : 'Resources/vaccination-data.csv'
-    https://data.who.int/dashboards/covid19/data?n=o
-    
-    description : data by country and per day of vaccination compaign
+        csv file : KAGGLE.com
+        https://www.kaggle.com/datasets/fedesoriano/coronavirus-covid19-vaccinations-data?resource=download
+        
+        description : data by country and per day of vaccination compaign
 
     1.4) Collect total Population for each country
 
@@ -71,7 +77,7 @@ OUTPUT : Question 4 : How many covid related deaths were reported throughout the
 
         4.2) Ouput 
             - DataFrame : pop_df
-            - csv file : Output/output_countries_gdp_pop.csv
+
 
         4.3) Processing
             - for LOOP each json file (1 by country)
@@ -82,7 +88,8 @@ OUTPUT : Question 4 : How many covid related deaths were reported throughout the
                         - Total population from 2019 to 2023
 
             - cleaning : 
-                - drop columns
+                 - create DataFrame : pop_df
+                 - drop columns
                 - rename columns
                 - drop NAN rows
 
@@ -120,15 +127,17 @@ cleaning and tranformation
 
     2.6) vaccination daily
         - groupby 'date'
-        - change datatype
         - reset_index
+        - change datatype
 
         - identify outliers
         - remove outliers IQR method
+        !!! : it seems we have nested outliers> dont want to change the method and remain with IQR > i accept the dataset as it is
 
         - Calculate moving average to smooth the daily result
 
-    2.7) create Df vaccination vs death vs population
+    2.7) create a DF with full data covid 
+        create Df vaccination vs death vs population
         - merge 
             deaths_country_df + 
             vaccination_country_df +
@@ -143,15 +152,18 @@ cleaning and tranformation
 
 3) analysis Vaccination vs deaths
 
-    3.1) daily evolution Vaccination vs deaths
+    3.1) analysis of the daily evolution
         - merge deaths_daily + vaccination daily
 
         OUTPUT :
-            - png file : plot 2 scales
-            - png file : regression + scatterplot
+            - png file : plot with 2 scales
+            - png file : regression + scatterplot (vaccinatin vs deaths)
 
 
     3.2) analyisis by country
+        create DF
+            - deaths_countries_df
+            - vaccination_countries_df
 
         calculate : 
             - vaccination %
@@ -167,248 +179,12 @@ cleaning and tranformation
 
 
     3.3) analysis by region
-
-        - groupBy "region'
+        create DF
+            - groupBy "region'
         calculate : 
             - vaccination %
             - death %
         
         OUTPUT 
         png file : scatter plot by region
-
-
-
-
-
-
-
-
-
-
-
-
-
-    1.2) output 
-        1.2.1 ) DataFrame death_total_country : Aggregation by country of 
-            - Cumulative_cases 
-            - Cumulative_deaths 
-        
-        1.2.1 ) daily deaths
-            - new DataFrame death_daily_clean_df : daily death per day > mobile average 7days
-            - npg export chart 
-
-    1.3) cleaning 
-        - Change Datatype
-        - rename columns
-        - add columns (y + m)
-
-    for 1.2.2, 
-        - identify outliers
-        - drop the outliers from the DF and work with a death_daily_clean_df
-        - calculate a mobile average (7 days basis)
-
-
-2) CREATE DATAFRAME FOR VACCINATION STATISTICS
-    
-    2.1) Input 
-    'Resources/vaccination-data.csv'
-    https://data.who.int/dashboards/covid19/data?n=o
-    description : data by country of vaccination compaign
-
-
-    2.2) Output 
-    DataFrame 'death_vaccins_df_clean '
-    csv file > 'Output/output_death_vaccination_data.csv'
-
-
-    2.3) processing
-        - Merge Vaccination_df + death_total_country
-        - cleaning : 
-            - rename columns
-            - change DataType
-
-
-
-4) CREATE DataFrame WITH GDP_perCapita & POPULATION DATA FOR EACH COUNTRY
-    # data from 2019 to 2023
-
-
-
-5) create a DF with full data covid
-
-    5.1) Output
-        - DataFrame data_covid_macro
-        - csv file : 'Output/output_covid_data_macro.csv'
-    
-    5.2) processing 
-        - MERGE death_vaccins_df_clean WITH gdp_pop_df
-        - Merge the new DF with Coutries_df : to retreie coordinate for each country
-        - cleaning
-            - Drop useless columns
-
-6) Analysis
-    multiple analysis 
-        - box plots on data : Vaccination%, death%, Growth
-        - maps representing countries and scale of Vaccination%, death%, Growth
-        - scatterplots and regression on data : box plots on data : Vaccination%, death%, Growth
-
-        6.1) output
-            png files in folder Output
-
-        6.2) Processing
-            - cleaning : selection of useful columns
-
-            - calculation of new values
-                - Vaccination_%
-                - death_%
-                - Grwth
-
-
-
-
-
-TO DELETE ????
-
-0) 
-
-    0.1 ) module importation
-
-        import pandas as pd
-        import pathlib as path
-
-        import numpy as np
-        from scipy.stats import linregress
-
-        import matplotlib.pyplot as plt
-        import hvplot.pandas
-        import geopandas as gpd
-
-        import requests
-        import json
-        from pprint import pprint
-
-    0.2) directory structure "nazim"
-        - q4_death_vs_vaccination.ipynb : contains the code to collect clean and analyse the data
-        - gitignore file
-        - folder Resources : with raw data (csv files)
-        - folder output : with outputs of the code : dataframes under cvs, png files
-        - other files : include Word and xls  documents for the projetc follow up
-
-
-1) CREATE DATA FRAME FOR DEATHS STATISTICS
-    
-    1.1) Input  
-    Resource/ : CSV file from World Health Organization csv file 
-    https://data.who.int/dashboards/covid19/data?n=o
-    desciption : Daily data from 2020 to 2024
-    
-    1.2) output 
-        1.2.1 ) DataFrame death_total_country : Aggregation by country of 
-            - Cumulative_cases 
-            - Cumulative_deaths 
-        
-        1.2.1 ) daily deaths
-            - new DataFrame death_daily_clean_df : daily death per day > mobile average 7days
-            - npg export chart 
-
-    1.3) cleaning 
-        - Change Datatype
-        - rename columns
-        - add columns (y + m)
-
-    for 1.2.2, 
-        - identify outliers
-        - drop the outliers from the DF and work with a death_daily_clean_df
-        - calculate a mobile average (7 days basis)
-
-
-2) CREATE DATAFRAME FOR VACCINATION STATISTICS
-    
-    2.1) Input 
-    'Resources/vaccination-data.csv'
-    https://data.who.int/dashboards/covid19/data?n=o
-    description : data by country of vaccination compaign
-
-
-    2.2) Output 
-    DataFrame 'death_vaccins_df_clean '
-    csv file > 'Output/output_death_vaccination_data.csv'
-
-
-    2.3) processing
-        - Merge Vaccination_df + death_total_country
-        - cleaning : 
-            - rename columns
-            - change DataType
-
-3) Extract the official referential of Countries used by the World Bank
-    ## will be used below to extract data (GDP + population)
-    ## can be used for different other requests
-    
-    3.1) Input
-    API World Bank : https://api.worldbank.org/v2/country?format=json
-
-    3.2) Ouput 
-        - DataFrame : countries_df
-        - csv file : Output/output_countries_list_who_referential.csv
-
-    3.3) Processing
-    for LOOP each page of the json file
-    extract the data releted to each country 
-
-4) CREATE DataFrame WITH GDP_perCapita & POPULATION DATA FOR EACH COUNTRY
-    # data from 2019 to 2023
-
-    4.1) Input
-    API World Bank : https://api.worldbank.org/v2/country/{COUNTRY}/indicator/{INDICATOR}?date={Time Periode}&format=json
-
-    4.2) Ouput 
-        - DataFrame : gdp_pop_df
-        - csv file : Output/output_countries_gdp_pop.csv
-
-    4.3) Processing
-        - for LOOP each json file (1 by country)
-            extract the data related to each country 
-            extraction in 2 Dataframes
-                    - code Iso 3 positions
-                    - code 2 positions 
-                    - GDP per capita from 2019 to 2023
-                    - Total population from 2019 to 2023
-        - Merge the 2 DF
-
-        - cleaning : 
-            - drop columns
-            - rename columns
-            - drop NAN rows
-
-5) create a DF with full data covid
-
-    5.1) Output
-        - DataFrame data_covid_macro
-        - csv file : 'Output/output_covid_data_macro.csv'
-    
-    5.2) processing 
-        - MERGE death_vaccins_df_clean WITH gdp_pop_df
-        - Merge the new DF with Coutries_df : to retreie coordinate for each country
-        - cleaning
-            - Drop useless columns
-
-6) Analysis
-    multiple analysis 
-        - box plots on data : Vaccination%, death%, Growth
-        - maps representing countries and scale of Vaccination%, death%, Growth
-        - scatterplots and regression on data : box plots on data : Vaccination%, death%, Growth
-
-        6.1) output
-            png files in folder Output
-
-        6.2) Processing
-            - cleaning : selection of useful columns
-
-            - calculation of new values
-                - Vaccination_%
-                - death_%
-                - Grwth
-
-
 
