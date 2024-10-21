@@ -62,6 +62,8 @@ OUTPUT : Question 4 : How many covid related deaths were reported throughout the
         https://data.who.int/dashboards/covid19/data?n=o
         
         desciption : Daily data from 01-2020 to 09-2024 (deaths + cases by country)
+
+        Output : deaths_df
     
     1.3) Collect Data for COVID vaccination compaign 
 
@@ -70,16 +72,27 @@ OUTPUT : Question 4 : How many covid related deaths were reported throughout the
         
         description : data by country and per day of vaccination compaign
 
-    1.4) Collect total Population for each country
+        Output : Vaccination_df
 
-        1.4.1 ) Input
+    1.4) Collect Data for COVID vaccination compaign End of Period
+
+        csv file from World Health Organization website 
+       https://data.who.int/dashboards/covid19/data?n=o
+        
+        description : data by country and per day of vaccination compaign end of period
+
+        Output : Vaccination_eop_clean_df
+
+    1.5) Collect total Population for each country
+
+        1.5.1 ) Input
         API World Bank : https://api.worldbank.org/v2/country/{COUNTRY}/indicator/{INDICATOR}?date={Time Periode}&format=json
 
-        4.2) Ouput 
+        1.5.2) Ouput 
             - DataFrame : pop_df
 
 
-        4.3) Processing
+        1.5.3) Processing
             - for LOOP each json file (1 by country)
                 extract the data related to each country 
                 extraction in 2 Dataframes
@@ -117,13 +130,11 @@ cleaning and tranformation
         - Calculate moving average to smooth the daily result
 
 
-    2.4) vaccination data
+    2.4) vaccination data end of period
         - Select columns
 
     2.5) vaccination by country
-        - group by 'country'
-        - rename columns
-        - reset_index
+        - vaccination_eop_clean_df
 
     2.6) vaccination daily
         - groupby 'date'
@@ -154,6 +165,9 @@ cleaning and tranformation
 
     3.1) analysis of the daily evolution
         - merge deaths_daily + vaccination daily
+        - replace NAN for deaths serie (not vaccination)
+
+        - for regression, i droped rowd where vaccination data where not available (after the compaign started)
 
         OUTPUT :
             - png file : plot with 2 scales
