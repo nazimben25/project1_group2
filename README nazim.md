@@ -4,7 +4,7 @@ Output of the project 1 - group 2 (ahmed, jasmeen, muskan, nazim)
 Question 4 : COVID correlation between vaccination compaign and Deaths 
 
 OUTPUT : Question 4 : How many covid related deaths were reported throughout the pandemic and is there a correlation to the vaccine rollout?
-
+xx
 
 0) 
     0.1) directory "nazim" structure 
