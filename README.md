@@ -27,7 +27,7 @@ Objective 2: Global Vaccine Rollout and its Impact on Stock Markets, Economies, 
 4.4.	How many covid related deaths were reported throughout the pandemic and is there a correlation to the vaccine rollout?
 
 5.	Plan
-The first aim is to compare the performance of stocks of 8 major vaccine companies throughout key points of the pandemic.  In doing so, we will make an analysis of this data in order to determine which stock was the best to invest in. 
+The first aim is to compare the performance of stocks of  major vaccine companies throughout key points of the pandemic.  In doing so, we will make an analysis of this data in order to determine which stock was the best to invest in. 
 
 The second aim is to assess the rollout of these different vaccines per country - this data will be used to make correlations at later points. 
 
