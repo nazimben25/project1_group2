@@ -5,7 +5,7 @@ Output of the project 1 - group 2 (ahmed, jasmeen, muskan, )
 
 Project 1 – Group 2
 1.	Project title
-Global Investment Trends in Stock Markets During the COVID-19 Pandemic: 
+An analysis of the impact of the COVID-19 vaccine on the world - stock market, economy and Covid-Realted Deaths 
 
 2.	Team Members
 -	Mansour, Ahmad
