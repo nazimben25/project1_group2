@@ -98,6 +98,7 @@ OUTPUT : Moderna emerged as the best-performing stock overall, achieving the hig
         -function to calculate base 100
         -set change column to base 100
         -Rename date to Year-For plotting -easy to handle 
+        - Two y axis to handle ranges for stock changes of vaccines effectively
 
         Output: '(Output/Q1_Performance of Vaccine stocks over time')
 
