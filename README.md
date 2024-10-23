@@ -22,10 +22,11 @@ Objective 2: Global Vaccine Rollout and its Impact on Stock Markets, Economies, 
 4.	Research Questions to answer
 
 4.1.	Which Pharmaceutical Company(Vaccine) stock performed the most during COVID-19?
+    (https://github.com/nazimben25/project1_group2/tree/main/Muskan)
 
-Question 1 : COVID -19 ( Stock Performance)
+Question 1 : COVID -19 ( Stock Performance)-"Which Company  stock performed the most during COVID-19?"
 
-OUTPUT : Question 1 : "Which Company  stock performed the most during COVID-19?"
+OUTPUT : Moderna emerged as the best-performing stock overall, achieving the highest price increase and capturing investor attention with its innovative mRNA vaccine
 
 0) 
     0.1) directory "muskan" structure 
@@ -115,6 +116,7 @@ OUTPUT : Question 1 : "Which Company  stock performed the most during COVID-19?"
 
 
 4.2.	QUESTION 2 - STUDYING THE CORRELATION BETWEEN VACCINE ROLLOUT OF INDIVIDUAL MANUFACTURERS AND THE STOCK VOLUME OF THEIR COMPANIES.
+       (https://github.com/nazimben25/project1_group2/tree/main/Ahmad-project)
 
 Output - linear regression graph and associated r-value allowing us to draw a conclusion on whether or not there is in fact a strong correlation between the two. In other words, whether or not it can be said statistically that as number of vaccines purchased by governments from a particular manufacturer increases, so does the stock volume of the company.
 
@@ -217,7 +219,7 @@ Output - linear regression graph and associated r-value allowing us to draw a co
 4.4.How many covid related deaths were reported throughout the pandemic and is there a correlation to the vaccine rollout?
 
 OUTPUT : 
-
+    https://github.com/nazimben25/project1_group2/tree/main/nazim
 0) 
     0.1) directory "nazim" structure 
         - q4_death_vs_vaccination.ipynb : contains the code to collect clean and analyse the data
