@@ -186,8 +186,87 @@ Output - linear regression graph and associated r-value allowing us to draw a co
 
 
 4.3.	Is there a correlation between the vaccine rollout and the change in economy of different countries throughout this timeframe (developing, developed, transitioning government)?
-    https://github.com/nazimben25/project1_group2/tree/master
+   https://github.com/nazimben25/project1_group2/tree/main/Jasleen
 
+1. The first was collecting all the data using the csv pathway for vaccines and CPI and GDP data:
+file_path = Path("Resources/vaccination-data.csv")
+vaccine_data = pd.read_csv(file_path)
+vaccine_data.head()
+
+2. Second is to drop and group the data using groupby,exclude and merge function to clean the data ane merge it the country with the corresponding region for the needed data:
+   CPI_merged_data = pd.merge(CPI_data,region_data,left_on="Country Code",right_on ="id",how="left")
+print(CPI_merged_data.columns)
+CPI_merged_data.columns = CPI_merged_data.columns.str.strip()
+CPI_clean_df = CPI_merged_data[["name","id","region", "longitude","latitude","Series Code","2019 [YR2019]","2023 [YR2023]"]]
+CPI_clean_df
+
+3.The third step is making the graphs for each datasets, first being vaccines: 
+#Ensure all regions are grouped 
+ df_grouped = vaccine_clean_df.groupby("region").sum()
+
+
+plt.figure(figsize=(10, 6))
+df_grouped["number of people vaccinated after booster per 100"].plot(kind='bar')
+
+Plotting a line graph: booster vs regionsplt.title('Persons vaccinated by Booster vs Region')
+plt.xlabel('Region')
+plt.ylabel('Persons vaccinated by Booster(per 100)')
+
+
+Adding plot labels and titleplt.xticks(rotation=45)
+plt.tight_layout()
+plt.savefig("People_Vaccinated with booster.png")
+plt.show()
+
+Second being CPI: 
+ data=CPI_clean_df
+df = pd.DataFrame(data)
+df['2019 [YR2019]'] = pd.to_numeric(df['2019 [YR2019]'], errors='coerce')  # Convert to numeric, coerce errors to NaN
+df = df.dropna(subset=['2019 [YR2019]'])  # Drop rows where CPI_2019 is NaN
+
+
+df['region'] = df['region'].astype(str)
+
+ Plotting a line graph: CPI rates in 2019 vs regions
+plt.figure(figsize=(10, 6))
+plt.plot(df['region'], df['2019 [YR2019]'], marker='o', linestyle='-', color='b')
+
+Adding plot labels and title
+plt.xlabel('Region')
+plt.ylabel('CPI Rate in 2019')
+plt.title('CPI Rate in 2019 vs Regions')
+plt.grid(True)
+
+Displaying the plot
+plt.xticks(rotation=45, ha='right')  # Rotate x-axis labels for better readability
+plt.tight_layout()
+plt.savefig("CPI_Rate_in_2019.png")
+plt.show()
+
+third being GDP: 
+ data=GDP_clean_df
+df = pd.DataFrame(data)
+df['2022 [YR2022]'] = pd.to_numeric(df['2022 [YR2022]'], errors='coerce')  # Convert to numeric, coerce errors to NaN
+df = df.dropna(subset=['2022 [YR2022]'])  # Drop rows where CPI_2019 is NaN
+
+Ensure all region values are strings
+df['region'] = df['region'].astype(str)
+
+Plotting a line graph: CPI rates in 2019 vs regions
+plt.figure(figsize=(10, 6))
+plt.plot(df['region'], df['2022 [YR2022]'], marker='o', linestyle='-', color='b')
+
+Adding plot labels and title
+plt.xlabel('Region')
+plt.ylabel('GDP Rate in 2022')
+plt.title('GDP Rate in 2022 vs Regions')
+plt.grid(True)
+
+Displaying the plot
+plt.xticks(rotation=45, ha='right')  # Rotate x-axis labels for better readability
+plt.tight_layout()
+plt.savefig("GDP_Rate_in_2022.png")
+plt.show()
 
 
 
@@ -461,84 +540,4 @@ Finally, we will use that same vaccine rollout data to determine if there is a c
 We plan to solve this by having a set number of countries.
 
 
-Jasleen:[ ](https://github.com/nazimben25/project1_group2/tree/main/Jasleen)
 
-1. The first was collecting all the data using the csv pathway for vaccines and CPI and GDP data:
-file_path = Path("Resources/vaccination-data.csv")
-vaccine_data = pd.read_csv(file_path)
-vaccine_data.head()
-
-2. Second is to drop and group the data using groupby,exclude and merge function to clean the data ane merge it the country with the corresponding region for the needed data:
-   CPI_merged_data = pd.merge(CPI_data,region_data,left_on="Country Code",right_on ="id",how="left")
-print(CPI_merged_data.columns)
-CPI_merged_data.columns = CPI_merged_data.columns.str.strip()
-CPI_clean_df = CPI_merged_data[["name","id","region", "longitude","latitude","Series Code","2019 [YR2019]","2023 [YR2023]"]]
-CPI_clean_df
-
-3.The third step is making the graphs for each datasets, first being vaccines: 
-#Ensure all regions are grouped 
- df_grouped = vaccine_clean_df.groupby("region").sum()
-
-
-plt.figure(figsize=(10, 6))
-df_grouped["number of people vaccinated after booster per 100"].plot(kind='bar')
-
-# Plotting a line graph: booster vs regionsplt.title('Persons vaccinated by Booster vs Region')
-plt.xlabel('Region')
-plt.ylabel('Persons vaccinated by Booster(per 100)')
-
-
-# Adding plot labels and titleplt.xticks(rotation=45)
-plt.tight_layout()
-plt.savefig("People_Vaccinated with booster.png")
-plt.show()
-
-Second being CPI: 
- data=CPI_clean_df
-df = pd.DataFrame(data)
-df['2019 [YR2019]'] = pd.to_numeric(df['2019 [YR2019]'], errors='coerce')  # Convert to numeric, coerce errors to NaN
-df = df.dropna(subset=['2019 [YR2019]'])  # Drop rows where CPI_2019 is NaN
-
-# Ensure all region values are strings
-df['region'] = df['region'].astype(str)
-
-# Plotting a line graph: CPI rates in 2019 vs regions
-plt.figure(figsize=(10, 6))
-plt.plot(df['region'], df['2019 [YR2019]'], marker='o', linestyle='-', color='b')
-
-# Adding plot labels and title
-plt.xlabel('Region')
-plt.ylabel('CPI Rate in 2019')
-plt.title('CPI Rate in 2019 vs Regions')
-plt.grid(True)
-
-# Displaying the plot
-plt.xticks(rotation=45, ha='right')  # Rotate x-axis labels for better readability
-plt.tight_layout()
-plt.savefig("CPI_Rate_in_2019.png")
-plt.show()
-
-third being GDP: 
- data=GDP_clean_df
-df = pd.DataFrame(data)
-df['2022 [YR2022]'] = pd.to_numeric(df['2022 [YR2022]'], errors='coerce')  # Convert to numeric, coerce errors to NaN
-df = df.dropna(subset=['2022 [YR2022]'])  # Drop rows where CPI_2019 is NaN
-
-# Ensure all region values are strings
-df['region'] = df['region'].astype(str)
-
-# Plotting a line graph: CPI rates in 2019 vs regions
-plt.figure(figsize=(10, 6))
-plt.plot(df['region'], df['2022 [YR2022]'], marker='o', linestyle='-', color='b')
-
-# Adding plot labels and title
-plt.xlabel('Region')
-plt.ylabel('GDP Rate in 2022')
-plt.title('GDP Rate in 2022 vs Regions')
-plt.grid(True)
-
-# Displaying the plot
-plt.xticks(rotation=45, ha='right')  # Rotate x-axis labels for better readability
-plt.tight_layout()
-plt.savefig("GDP_Rate_in_2022.png")
-plt.show()
